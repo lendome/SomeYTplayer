@@ -36,10 +36,10 @@ clear()
 def startfunc():
     startfunc.songlist = []
     startfunc.hasexited = False
-    Songcount = input("How many songs to play? [custom, save] \n")
+    Songcount = input("How many songs to play? [custom, save, delete, help] \n")
     if(Songcount.lower() == "custom"):
         print("adding custom...")
-        songfile = open("custom.txt", "r")
+        songfile = open("./Save files/custom.txt", "r")
         for line in songfile.readlines():
             startfunc.songlist += [line]
         print(startfunc.songlist)
@@ -50,10 +50,25 @@ def startfunc():
             if(songtoadd == "exit"):
                 startfunc.hasexited = True
             else:
-                songfile = open("custom.txt", "a")
-                songfile.write("\n")
-                songfile.write(songtoadd)
+                songfile = open("./Save files/custom.txt", "a+")
+                if(len(songfile.readline()) > 1):
+                    songfile.write("\n")
+                    songfile.write(songtoadd)
+                else:
+                    songfile.write(songtoadd)
                 songfile.close()
+        startfunc()
+    if(Songcount.lower() == "delete"):
+        songfile = open("./Save files/custom.txt", "w+")
+        songfile.write("")
+        print("successfully deleted.")
+        startfunc()
+    if(Songcount.lower() == "help"):
+        print("\n Custom: Load and play all saved songs \n",
+            "Save: Add a song (link) to saved songs \n",
+            "delete: Remove all songs from saved songs \n",
+            "Simply inserting a number here, will state the ammount of songs you wish to play right now. \n",
+            "Simply add all the links for the songs you wish to play now. \n")
         startfunc()
         
 
@@ -63,11 +78,10 @@ def startfunc():
                 Songlink = input("Song number " + str(l + 1) + ": \n")
                 startfunc.songlist += [Songlink]
         except: 
-            if(Songcount != "custom" & Songcount != "save"):
-                print("Error: Invalid number")
-            else:
+            if(Songcount == "custom" or Songcount == "save"):
                 print("Did not load a number")
-
+            else:
+                print("Error: Invalid number")
 
 startfunc()
 
