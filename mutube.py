@@ -33,31 +33,43 @@ player = instance.media_player_new()
 print("created player")
 clear()
 
-songlist = []
-autosongs = ["https://www.youtube.com/watch?v=dQw4w9WgXcQ",
- "https://www.youtube.com/watch?v=rYLHFMjNZjo",
-  "https://www.youtube.com/watch?v=_U0PrwLpb_Q",
-   "https://www.youtube.com/watch?v=KB68LQoZHjI",
-    "https://www.youtube.com/watch?v=d_HlPboLRL8",
-     "https://www.youtube.com/watch?v=PXGycbkbtW0",
-      "https://www.youtube.com/watch?v=RkkdYdWMfQ0",
-       "https://www.youtube.com/watch?v=hyScwB3ciLM",]
+def startfunc():
+    startfunc.songlist = []
+    startfunc.hasexited = False
+    Songcount = input("How many songs to play? [custom, save] \n")
+    if(Songcount.lower() == "custom"):
+        print("adding custom...")
+        songfile = open("custom.txt", "r")
+        for line in songfile.readlines():
+            startfunc.songlist += [line]
+        print(startfunc.songlist)
+        songfile.close()
+    if(Songcount.lower() == "save"):
+        while startfunc.hasexited == False:
+            songtoadd = input("Song link to add to saved list (type exit to stop adding): \n")
+            if(songtoadd == "exit"):
+                startfunc.hasexited = True
+            else:
+                songfile = open("custom.txt", "a")
+                songfile.write("\n")
+                songfile.write(songtoadd)
+                songfile.close()
+        startfunc()
+        
 
-Songcount = input("How many songs to play? (leave blank for one) \n")
-if(Songcount == "auto"):
-    print("auto adding...")
-    for i in range(len(autosongs)):
-        songlist += [random.choice(autosongs)]
-else:
-    try:
-        for l in range(int(Songcount)):
-            Songlink = input("Song number " + str(l + 1) + ": \n")
-            songlist += [Songlink]
-    except: 
-        print("Error: Invalid number")
+    else:
+        try:
+            for l in range(int(Songcount)):
+                Songlink = input("Song number " + str(l + 1) + ": \n")
+                startfunc.songlist += [Songlink]
+        except: 
+            if(Songcount != "custom" & Songcount != "save"):
+                print("Error: Invalid number")
+            else:
+                print("Did not load a number")
 
 
-
+startfunc()
 
 #https://www.youtube.com/watch?v=dQw4w9WgXcQ
 def stopwatch(seconds):
@@ -94,8 +106,9 @@ def playsong(link):
     player.play()
     stopwatch(playsong.video.length)
     #time.sleep(video.length)
+
     
-for song in songlist:
+for song in startfunc.songlist:
     try:
         playsong(song)
     except: 
