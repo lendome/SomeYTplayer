@@ -85,10 +85,10 @@ def startfunc():
         startfunc()
     if(Songcount.lower() == "help"):
         print("\n Custom: Load and play all saved songs \n",
-            "Save: Add a song (link) to saved songs \n",
+            "Save: Add a song (name) to saved songs \n",
             "delete: Remove all songs from saved songs \n",
-            "Simply inserting a number here, will state the ammount of songs you wish to play right now. \n",
-            "Simply add all the links for the songs you wish to play now. \n")
+            "Simply inserting a number here, will state the ammount of songs you wish to play right now. (has to be done) \n",
+            "Simply add all the names for the songs you wish to play now. (in order of course) \n")
         startfunc()
         
 
