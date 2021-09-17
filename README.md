@@ -2,8 +2,10 @@
 Title suggests it, some youtube player.
 ... There is really not much to read here.
 
-It works by first stating how many songs you wish to play 
+It works by first stating how many songs you wish to play \
+\
 (leaving blank will just set it to 1) <-- this, ladies and gents, is a function i wanted to add. but i was too lazy to.\
+\
 And then just simply writing the name of each song to play it. in the highest possible quality of course.
 
 It also has a **save system**, to save a song, simply type `save` when it asks how many songs to play.
