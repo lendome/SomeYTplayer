@@ -21,9 +21,12 @@ def clear():
     else:
         _ = system('clear')
 
-    
+isskipped = False
 
-
+def doskip():
+    isskipped = True
+    time.sleep(1)
+    isskipped = False
 
 
 input("press enter to load in")
@@ -104,6 +107,9 @@ def startfunc():
                 print("Loading...")
             else:
                 print("Error: Invalid number")
+                time.sleep(0.5)
+                print("exiting...")
+                time.sleep(1)
 
 startfunc()
 
@@ -122,10 +128,15 @@ def stopwatch(seconds):
                 "seconds: %02d" % (elapsed) + " / " + str(playsong.theothervar),
                 " " + stopwatch.converted +"%", "  \n",
                 playsong.jsonn["title"], ": \n","▮" * int (stopwatch.converted),
-                "▯" * int(100 - float(stopwatch.converted) - 1), "| \n", "S to skip, B to loop, (press and hold) X to open in browser")
-        time.sleep(0.5)  
+                "▯" * int(100 - float(stopwatch.converted) - 1), "| \n", " (press and hold) S to skip, B to loop, X to open in browser")
+        time.sleep(0.2)  
         if keyboard.is_pressed('x'):
+            print("opening in brower...")
             webbrowser.open(playsong.thelink)
+        elif keyboard.is_pressed('s'):
+            print("skipping... (keep holding s if it doesnt skip immediately)")
+            return False
+            
         clear()
 
 #
